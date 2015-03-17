@@ -26,7 +26,7 @@ def identity(n):
     I = np.zeros((n, n))
     diag = np.ones(n)
     np.fill_diagonal(I, diag)
-    return I
+    return matrix(I)
 
 
 def invert(M):
@@ -36,6 +36,16 @@ def invert(M):
     """
     M = isMatrix(M)
     return M.I
+
+
+def diagM(l):
+    """
+    Return input list as diagonal matrix.
+    """
+    dim = len(l)
+    M = np.zeros((dim, dim))
+    np.fill_diagonal(M, l)
+    return matrix(M)
 
 
 def posM(M):

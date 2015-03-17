@@ -25,6 +25,7 @@ def nodeMix(F, K, P, t):
     """
     K = matrix(K)
     dim = K.shape[0]
+    I = identity(dim)
 
     if type(t) == int:
         timeSteps = [t]
@@ -35,7 +36,6 @@ def nodeMix(F, K, P, t):
 
     for i, t in enumerate(timeSteps):
         P = diagM(P[:, t])
-        I = identity(dim)
         F = diagM(F[:, t])
         C[i] = posM(P) * invert(I - negM(posM(K * F) * K.T))
     return C

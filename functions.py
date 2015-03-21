@@ -62,3 +62,13 @@ def negM(M):
     """
     M[np.where(M > 0)] = 0
     return M
+
+
+def normCols(M):
+    """
+    Return matrix with normalised column vectors.
+    """
+    cols = M.shape[1]
+    for c in range(cols):
+        M[:, c] /= sum(M[:, c])
+    return M

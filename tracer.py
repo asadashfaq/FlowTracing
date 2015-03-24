@@ -8,7 +8,7 @@ Main functions for flow tracing.
 """
 
 
-def nodeMix(F, K, P, t, dir):
+def nodeMix(Flow, K, P, t, dir):
     """
     Calculate power mix of nodes.
 
@@ -37,14 +37,14 @@ def nodeMix(F, K, P, t, dir):
 
     if dir == 'export':
         for i, t in enumerate(timeSteps):
-            P = diagM(P[:, t])
-            F = diagM(F[:, t])
-            C[i] = posM(P) * abs(invert(I - negM(posM(K * F) * K.T)))
+            L = diagM(P[:, t])
+            F = diagM(Flow[:, t])
+            C[i] = posM(L) * abs(invert(I - negM(posM(K * F) * K.T)))
     elif dir == 'import':
         for i, t in enumerate(timeSteps):
-            P = diagM(P[:, t])
-            F = diagM(F[:, t])
-            C[i] = abs(negM(P)) * abs(invert(I + negM(K * F) * K.T))
+            L = diagM(P[:, t])
+            F = diagM(Flow[:, t])
+            C[i] = abs(negM(L)) * abs(invert(I + negM(K * F) * K.T))
     return C
 
 

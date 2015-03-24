@@ -39,12 +39,12 @@ def nodeMix(F, K, P, t, dir):
         for i, t in enumerate(timeSteps):
             P = diagM(P[:, t])
             F = diagM(F[:, t])
-            C[i] = posM(P) * invert(I - negM(posM(K * F) * K.T))
+            C[i] = posM(P) * abs(invert(I - negM(posM(K * F) * K.T)))
     elif dir == 'import':
         for i, t in enumerate(timeSteps):
             P = diagM(P[:, t])
             F = diagM(F[:, t])
-            C[i] = abs(negM(P)) * invert(I + negM(K * F) * K.T)
+            C[i] = abs(negM(P)) * abs(invert(I + negM(K * F) * K.T))
     return C
 
 

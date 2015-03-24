@@ -68,7 +68,6 @@ def normCols(M):
     """
     Return matrix with normalised column vectors.
     """
-    cols = M.shape[1]
-    for c in range(cols):
-        M[:, c] /= sum(M[:, c])
-    return M
+    row_sums = M.sum(axis=1)
+    newM = M / row_sums[:, np.newaxis]
+    return newM

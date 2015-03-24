@@ -68,10 +68,18 @@ def normCols(M):
     """
     Return matrix with normalised column vectors.
     """
-    rows, cols = M.shape
     M.dtype = 'float'
-    for col in xrange(cols):
-        colSum = M[:, col].sum()
-        if colSum != 0:
-            M[:, col] /= colSum
+    if len(M.shape) < 3:
+        rows, cols = M.shape
+        for col in xrange(cols):
+            colSum = M[:, col].sum()
+            if colSum != 0:
+                M[:, col] /= colSum
+    else:
+        dims, rows, cols = M.shape
+        for dim in xrange(dims):
+            for col in xrange(cols):
+                colSum = M[dim, :, col].sum()
+                if colSum != 0:
+                    M[dim, :, col] /= colSum
     return M

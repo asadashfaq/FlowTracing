@@ -84,11 +84,3 @@ def linkMix(F, K, C, t, dir):
             F = diagM(F[:, t])
             H[i] = C[i] * negM(K * F)
     return H
-
-
-# load test values
-F = np.load('./input/F.npy')
-K = np.load('./input/K.npy')
-P = np.load('./input/phi.npy')
-t = [0, 1]
-C = nodeMix(F, K, P, t)
